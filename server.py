@@ -1,8 +1,9 @@
 from flask import Flask
+from flask.ext.cors import CORS
 import keygen
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/updates')
 def get_updates():
