@@ -18,8 +18,13 @@ api = twitter.Api(consumer_key=consumer_key,
 
 def update_tweets():
     data = []
-    for tweet in api.GetSearch("#cccamp15"):
+    for tweet in api.GetSearch('#cccamp15', result_type='recent'):
         tweet_data = dict()
+        tweet_images = list()
+        if len(tweet.media) > 0:
+            for medium in tweet.media:
+                tweet_images.append(medium['media_url_https'])
+        tweet_data['images'] = tweet_images
         tweet_data['text'] = tweet.text
         tweet_data['user'] = "@" + tweet.user.screen_name
         data.append(tweet_data)
